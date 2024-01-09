@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="history.css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div>
+      <form action="" method="post">
+        <label for="orderSearch">Order search:</label>
+        <input type="search" id="search" name="search" />
+        <input type="submit" />
+      </form>
+      <!-- <a href="/bms/index.html"><button class="add-btn">Add Order</button></a>
+ -->
+    </div>
+    <div id="customerDataContainer"></div>
+    <style>
+
+    </style>
+
+    <script>
+      function loadData(customertData) {
+        if (customertData) {
+          let htmlContent =
+            "<h2>Customer Data</h2> <table><tr><th>OrderID</th><th>Name</th><th>Order</th><th>Quantity</th><th>Date</th></tr>";
+          customertData.forEach((data,index) => {
+            htmlContent +=
+              "<tr><td>" +
+              data.uniqueid +
+              "</td><td>" +
+              data.name +
+              "</td> <td>" +
+              data.order +
+              "</td> <td>" +
+              data.quantity +
+              "</td><td>" +
+              data.date +
+              "</td><td><button class='delete-btn' onclick='deleteItem(" + index + ")'>delete</button> <button class='edit-btn' onclick='editItem(" + index + ")'>edit</button></td></tr> ";
+          });
+          htmlContent += "</table> ";
+          document.getElementById("customerDataContainer").innerHTML =
+            htmlContent;
+        } else {
+          document.getElementById("customerDataContainer").innerHTML =
+            "<p>No data available.</p>";
+        }
+      }
+
+
+
+ function editItem(index) {
+  // Redirect to the edit page with the index as a query parameter
+  window.location.href = 'edit.html?index=' + index;
+}
+
+
+      ///// delete item
+      function deleteItem(index){
+        let formDataJSON = localStorage.getItem("customerData");
+      let customerData = JSON.parse(formDataJSON);
+      if (customerData) {
+        customerData.splice(index, 1);
+        localStorage.setItem("customerData", JSON.stringify(customerData));
+        loadData(customerData);
+      }
+      }
+      let formDataJSON = localStorage.getItem("customerData");
+      let customertData = JSON.parse(formDataJSON);
+
+      loadData(customertData);
+
+
+      let searchValue = document.getElementById('search')
+      searchValue.addEventListener('input', function() {
+
+      if(searchValue.value.length === 0){
+        loadData(customertData);
+      }
+    });
+
+
+
+      var handleSearch = function (event) {
+        event.preventDefault();
+
+        let searchTerm = event.target.elements["search"].value;
+        //console.log(searchTerm)
+        var orderid = searchTerm
+          .toLowerCase()
+          .split(" ")
+          .filter(function (searchTerm) {
+            return searchTerm.trim() !== "";
+          });
+        //console.log(orderid)
+
+        if (orderid.length) {
+          //  Create a regular expression of all the search terms
+          var searchTermRegex = new RegExp(orderid.join("|"), "gim");
+          //console.log(searchTermRegex)
+          let formDataJSON = localStorage.getItem("customerData");
+
+          if (formDataJSON) {
+            let customertData = JSON.parse(formDataJSON);
+            //console.log(customertData)
+            let filteredList = customertData.filter(function (customers) {
+              let customerString = "";
+              //console.log(customer)
+              for (let customer in customers) {
+                if (
+                  customers.hasOwnProperty(customer) &&
+                  customers[customer] !== ""
+                ) {
+                  customerString +=
+                    customers[customer].toString().toLowerCase().trim() + " ";
+                }
+              }
+              return customerString.match(searchTermRegex);
+            });
+            loadData(filteredList);
+          }
+        } else {
+          loadData(customertData);
+        }
+      };
+      document.addEventListener("submit", handleSearch);
+      handleSearch;
+    </script>
+  </body>
+</html>

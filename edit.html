@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Document</title>
+  </head>
+  <body>
+
+    <div class="all-item">
+      <div class="item">
+        <form action="" id="editform">
+          <input
+            class="inner-item"
+            type="hidden"
+            id="edituniqueid"
+            name="id"
+          /><br />
+          <label class="inner-item" for="name">Name:</label>
+          <input
+            class="inner-item"
+            required
+            type="text"
+            id="editName"
+            name="name"
+          /><br /><br />
+          <label class="inner-item" for="order">Order:</label>
+          <input
+            class="inner-item"
+            required
+            type="text"
+            id="editOrder"
+            name="order"
+          /><br /><br />
+          <label class="inner-item" for="quantity">Quantity Of Food:</label>
+          <input
+            class="inner-item"
+            required
+            type="text"
+            id="editQuantity"
+            name="quantity"
+          /><br /><br />
+          <label class="inner-item" for="date">Order date:</label>
+          <input
+            class="inner-item"
+            required
+            type="date"
+            id="editDate"
+            name="date"
+          /><br /><br />
+          <input class="add-value" type="submit" value="Submit" />
+        </form>
+      </div>
+      <a href="/bms/customerHistory.html"
+        ><button class="btn">order history</button></a
+      >
+    </div>
+
+    <script>
+        let params = new URLSearchParams(window.location.search);
+        let editIndex = parseInt(params.get("index"));
+        console.log(editIndex);
+        let formDataJSON = localStorage.getItem("customerData");
+        let customerData = JSON.parse(formDataJSON);
+        if (customerData && customerData[editIndex]) {
+            document.getElementById("edituniqueid").value =
+            customerData[editIndex].uniqueid;
+          document.getElementById("editName").value =
+            customerData[editIndex].name;
+          document.getElementById("editOrder").value =
+            customerData[editIndex].order;
+          document.getElementById("editQuantity").value =
+            customerData[editIndex].quantity;
+          document.getElementById("editDate").value =
+            customerData[editIndex].date;
+
+          document
+            .getElementById("editform")
+            .addEventListener("submit", function (event) {
+              event.preventDefault();
+              let editedData = {
+                uniqueid: document.getElementById("edituniqueid").value,
+                name: document.getElementById("editName").value,
+                order: document.getElementById("editOrder").value,
+                quantity: document.getElementById("editQuantity").value,
+                date: document.getElementById("editDate").value,
+              };
+              let formDataJSON = localStorage.getItem("customerData");
+              let customerData = JSON.parse(formDataJSON);
+              customerData[editIndex] = editedData;
+              localStorage.setItem('customerData', JSON.stringify(customerData));
+              window.location.href = 'index.html'
+            });
+        }
+      </script>
+
+  </body>
+  <script src=""></script>
+</html>

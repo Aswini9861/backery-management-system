@@ -1,0 +1,38 @@
+table {
+    border-collapse: collapse;
+    width: 100%;
+  }
+
+  th,
+  td {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+  }
+
+  th {
+    background-color: #f2f2f2;
+  }
+  .delete-btn{
+    background-color: rgb(184, 69, 69);
+    color: white;
+    font-size: 16px;
+  }
+
+  .add-btn{
+    background-color: #4CAF50;
+    color: white;
+    padding: 9px 10px 12px 13px;
+    border: none;
+    border-radius: 5px;
+    margin-left: 83rem;
+  }
+
+  .edit-btn{
+    background-color: rgb(90, 184, 69);
+    color: white;
+    border-radius: 5px;
+    height: 25px;
+    width: 40px;
+    font-size: 16px;
+  }

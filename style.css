@@ -1,0 +1,94 @@
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Gilroy', sans-serif;
+    background-image: url("https://images.unsplash.com/photo-1511018556340-d16986a1c194?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjB8fGJha2VyeXxlbnwwfHwwfHx8MA%3D%3D");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+}
+
+
+
+.no-background {
+    background-image: none;
+}
+
+.item {
+    width: 60%;
+    height: auto;
+    max-width: 432px;
+    margin: 100px auto;
+    outline: solid 11px black;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    background-color: white; /* Set the background color to white for the .item div */
+}
+
+
+.inner-item {
+    font-family: "Lilita One", sans-serif;
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.add-value{
+
+    background-color: #4CAF50;
+    color: white;
+    padding: 9px 15px;
+    border: none;
+    border-radius: 5px;
+
+}
+
+/* a {
+    color: white;
+    text-decoration: none;
+    text-align: center;
+    display: block;
+    margin-top: -156px;
+    margin-left: 89px;
+    cursor: pointer;
+}
+ */
+
+.btn{
+    background-color: #4CAF50;
+    color: white;
+    padding: 9px 10px 12px 13px;
+    border: none;
+    border-radius: 5px;
+}
+.history-btn{
+    background-color: #4CAF50;
+    color: white;
+    padding: 9px 10px 12px 13px;
+    border: none;
+    border-radius: 5px;
+}
+
+.history-div-btn{
+    margin-left: 212px;
+
+
+}
+.input-div-btn {
+    display: flex;
+    flex-direction: row-reverse;
+    flex-wrap: nowrap;
+    justify-content: center;
+}
+
+.input-div-btn input,
+.input-div-btn button {
+    margin-right: 10px; /* Adjust as needed */
+}
+
+
+h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 24px;
+}
